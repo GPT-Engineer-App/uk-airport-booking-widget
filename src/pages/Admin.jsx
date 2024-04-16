@@ -3,24 +3,36 @@ import { Box, Button, Container, FormControl, FormLabel, Input, NumberInput, Num
 const Admin = () => {
   return (
     <Container maxW="container.md" py={10}>
-      <Heading as="h1" mb={6} textAlign="center">
-        Admin Panel - Blackpool Cabs LTD
+      <Heading as="h1" mb={4} textAlign="center" style={{ color: "#2a69ac" }}>
+        Admin Panel - Pricing Configuration
       </Heading>
-      <VStack spacing={4} as="form">
+      <VStack spacing={4} as="form" style={{ border: "2px solid #153e75", padding: "20px", borderRadius: "10px" }}>
         <FormControl isRequired>
-          <FormLabel htmlFor="pricePerPassenger">Price per Passenger</FormLabel>
+          <FormLabel htmlFor="weekdayPricePerPassenger">Weekday Price per Passenger</FormLabel>
           <NumberInput min={0}>
-            <NumberInputField id="pricePerPassenger" name="pricePerPassenger" />
+            <NumberInputField id="weekdayPricePerPassenger" name="weekdayPricePerPassenger" />
           </NumberInput>
         </FormControl>
         <FormControl isRequired>
-          <FormLabel htmlFor="pricePerBag">Price per Bag</FormLabel>
+          <FormLabel htmlFor="weekendPricePerPassenger">Weekend Price per Passenger</FormLabel>
           <NumberInput min={0}>
-            <NumberInputField id="pricePerBag" name="pricePerBag" />
+            <NumberInputField id="weekendPricePerPassenger" name="weekendPricePerPassenger" />
           </NumberInput>
         </FormControl>
-        <Button colorScheme="blue" mt={4}>
-          Save Settings
+        <FormControl isRequired>
+          <FormLabel htmlFor="weekdayPricePerBag">Weekday Price per Bag</FormLabel>
+          <NumberInput min={0}>
+            <NumberInputField id="weekdayPricePerBag" name="weekdayPricePerBag" />
+          </NumberInput>
+        </FormControl>
+        <FormControl isRequired>
+          <FormLabel htmlFor="weekendPricePerBag">Weekend Price per Bag</FormLabel>
+          <NumberInput min={0}>
+            <NumberInputField id="weekendPricePerBag" name="weekendPricePerBag" />
+          </NumberInput>
+        </FormControl>
+        <Button colorScheme="blue" mt={4} size="lg">
+          Update Prices
         </Button>
       </VStack>
     </Container>

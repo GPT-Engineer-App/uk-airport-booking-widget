@@ -4,16 +4,24 @@ import { FaCalendarAlt, FaClock, FaSuitcase, FaUsers, FaPlane, FaRegPaperPlane }
 const Index = () => {
   const toast = useToast();
 
+  const calculatePrice = (passengers, bags) => {
+    return passengers * 20 + bags * 5;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
+    const passengers = parseInt(formData.get("passengers"));
+    const bags = parseInt(formData.get("bags"));
+    const calculatedPrice = calculatePrice(passengers, bags);
     const data = {
       date: formData.get("date"),
       time: formData.get("time"),
       flightNumber: formData.get("flightNumber"),
-      passengers: formData.get("passengers"),
-      bags: formData.get("bags"),
+      passengers,
+      bags,
       notes: formData.get("notes"),
+      price: calculatedPrice,
     };
 
     // Simulate sending email
@@ -32,10 +40,10 @@ const Index = () => {
 
   return (
     <Container maxW="container.sm" py={10} boxShadow="xl" rounded="lg" p={6} bg="white">
-      <Heading as="h1" mb={6} textAlign="center">
-        Blackpool Cabs LTD Booking
+      <Heading as="h1" mb={4} textAlign="center">
+        Blackpool Cabs LTD Booking - Round Trip
       </Heading>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ border: "2px solid #2a69ac", padding: "20px", borderRadius: "10px" }}>
         <VStack spacing={4}>
           <FormControl isRequired>
             <FormLabel htmlFor="date">Pickup Date</FormLabel>
@@ -61,13 +69,24 @@ const Index = () => {
               <NumberInputField id="bags" name="bags" />
             </NumberInput>
           </FormControl>
+          <FormControl isRequired>
+            <FormLabel htmlFor="returnDate">Return Date</FormLabel>
+            <Input id="returnDate" type="date" name="returnDate" leftIcon={<FaCalendarAlt />} />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel htmlFor="returnTime">Return Time</FormLabel>
+            <Input id="returnTime" type="time" name="returnTime" leftIcon={<FaClock />} />
+          </FormControl>
           <FormControl>
             <FormLabel htmlFor="notes">Additional Notes</FormLabel>
             <Textarea id="notes" name="notes" placeholder="Enter any special requests or notes here" />
           </FormControl>
-          <Button type="submit" leftIcon={<FaRegPaperPlane />} colorScheme="blue" size="lg">
-            Submit Booking
-          </Button>
+          <Box display="flex" justifyContent="space-between" alignItems="center" w="full">
+            <Text fontSize="2xl">Total Price: £{calculatedPrice}</Text>
+            <Button type="submit" leftIcon={<FaRegPaperPlane />} colorScheme="blue" size="lg">
+              Submit Booking
+            </Button>
+          </Box>
         </VStack>
       </form>
     </Container>
