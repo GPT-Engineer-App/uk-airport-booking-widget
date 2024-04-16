@@ -1,8 +1,10 @@
 import { Box, Button, Container, FormControl, FormLabel, Input, NumberInput, NumberInputField, Textarea, VStack, Heading, useToast } from "@chakra-ui/react";
+import { useState } from "react";
 import { FaCalendarAlt, FaClock, FaSuitcase, FaUsers, FaPlane, FaRegPaperPlane } from "react-icons/fa";
 
 const Index = () => {
   const toast = useToast();
+  const [calculatedPrice, setCalculatedPrice] = useState(0);
 
   const calculatePrice = (passengers, bags) => {
     return passengers * 20 + bags * 5;
@@ -13,7 +15,7 @@ const Index = () => {
     const formData = new FormData(event.target);
     const passengers = parseInt(formData.get("passengers"));
     const bags = parseInt(formData.get("bags"));
-    const calculatedPrice = calculatePrice(passengers, bags);
+    setCalculatedPrice(calculatePrice(passengers, bags));
     const data = {
       date: formData.get("date"),
       time: formData.get("time"),
