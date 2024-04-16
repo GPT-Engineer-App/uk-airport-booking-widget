@@ -31,7 +31,7 @@ const Index = () => {
   };
 
   return (
-    <Container maxW="container.md" py={10}>
+    <Container maxW="container.sm" py={10} boxShadow="xl" rounded="lg" p={6} bg="white">
       <Heading as="h1" mb={6} textAlign="center">
         Blackpool Cabs LTD Booking
       </Heading>
